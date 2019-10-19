@@ -11,12 +11,14 @@ app.get('/webScripts.js', (request, response) => response.sendFile(`${__dirname}
 app.get('/favicon.ico', (request, response) => response.sendFile(`${__dirname}/webPages/favicon.ico`));
 app.get('/', (request, response) => response.sendFile(`${__dirname}/webPages/index.html`));
 
-function constrSolution(path) {
+function constrSolution(path, elapsed) {
     let objToSend = {};
     let jsonStr;
 
     objToSend.messageType = 1;
-    objToSend.movements = JSON.stringify(path);
+    objToSend.elapsedTime = elapsed;
+    objToSend.openNodes = path.openNodes;
+    objToSend.movements = JSON.stringify(path.moves);
     jsonStr = JSON.stringify(objToSend);
 
     return (jsonStr);
@@ -27,8 +29,10 @@ app.post('/message', (request, response) => {
 
     console.log("Request from client: ", JSON.stringify(postBody));
 
+    let start = new Date().getTime();
     let path = solver(JSON.parse(postBody.map));
-    let solution = constrSolution(path);
+    let elapsed = new Date().getTime() - start;
+    let solution = constrSolution(path, elapsed);
     console.log("Response to client: ", solution);
     
     // construct response

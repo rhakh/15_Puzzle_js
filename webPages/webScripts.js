@@ -191,6 +191,14 @@ function handleMoves(moves) {
     doMove(moves, 1);
 }
 
+function handleInfo(_openNodes, _elapsedTime) {
+    let openNodes = document.getElementById('oN');
+    let elapsedTime = document.getElementById('eTime');
+
+    openNodes.innerHTML = '<b>Open nodes:</b> ' + _openNodes;
+    elapsedTime.innerHTML = '<b>Elapsed time:</b> ' + _elapsedTime + ' ms';
+}
+
 function onClickSolve() {
     let objToSend = {};
     let strToSend;
@@ -209,8 +217,11 @@ function onClickSolve() {
         data: strToSend,
         success(response) {
             let moves = JSON.parse(response.movements);
+            let openNodes = JSON.parse(response.openNodes);
+            let elapsedTime = JSON.parse(response.elapsedTime);
 
             console.log("Response from server: ", response);
+            handleInfo(openNodes, elapsedTime);
             handleMoves(moves);
         },
     });

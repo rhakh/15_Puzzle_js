@@ -16,9 +16,10 @@ function nodeComparison(nodeA, nodeB) {
     // return (nodeA.composedPrice < nodeB.composedPrice);
 }
 
-function constructPath(node) {
+function constructPath(node, openNodes) {
     let curr = node;
     let path = [];
+    let retPath = {};
 
     while (curr.move != n.movesEnum.ROOT) {
         path.push(curr.move);
@@ -26,8 +27,10 @@ function constructPath(node) {
     }
     path.push(curr.move);
     path.reverse();
+    retPath.moves = path;
+    retPath.openNodes = openNodes;
 
-    return (path);
+    return (retPath);
 }
 
 function getInversions(map) {
@@ -65,10 +68,12 @@ function isSolvable(map) {
 function aStar(map) {
     let openSet = new FastPriorityQueue(nodeComparison);
     let closedSet = new Set();
+    let openNodes = 0;
     let root = new n.Node(map, 0);
     let curr;
 
     openSet.add(root);
+    openNodes++;
     while (!openSet.isEmpty()) {
         curr = openSet.poll();
 
@@ -84,7 +89,7 @@ function aStar(map) {
         // Finish
         if (curr.price == 0) {
             // construct path
-            let path = constructPath(curr);
+            let path = constructPath(curr, openNodes);
             return (path);
         }
 
@@ -93,6 +98,7 @@ function aStar(map) {
             try {
                 let node = new n.Node(curr.map, curr.length, move, curr);
                 openSet.add(node);
+                openNodes++;
             }
             catch (err) {
                 // nothing to do
