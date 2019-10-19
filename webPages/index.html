@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>15 Puzzle</title>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <!-- CDN -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel|Mukta+Malar" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src = "webScripts.js"></script>
+
+</head>
+<body style="font-family: 'Work Sans', sans-serif;">
+<nav>
+    <div class="nav-wrapper nav" style="text-align: center">
+        <a href="#" class="brand-logo" style="margin-left: -100px"><i class="material-icons left">extension</i> 15 Puzzle</a>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col s3">
+            <form id="inputForm" style="margin: 50px auto">
+                <div class="input-field">
+                    <input id="mapSize" type="text" name="mapSize" value="4"><br>
+                    <label for="mapSize">Puzzle size</label>
+                </div>
+                <div class="input-field">
+                    <input id="iterations" type="text" name="iterations" value="42"><br>
+                    <label for="iterations">Number of moves</label>
+                 </div>
+                 <div>
+                    <input class="waves-effect btn" type="button" onclick="onClickShuffle(this.form, puzzle)" value="Shuffle">
+                    <input class="waves-effect btn" type="button" onclick="onClickSolve()" value="Solve">
+                 </div>
+            </form>
+            <hr>
+            <div class="row infoBlock">
+			    <p id="oN" class="meta"></p>
+				<p id=cN class="meta"></p>
+				<p id="eTime" class="meta"></p>
+				<p id="usedMemory" class="meta"></p>
+			</div>
+        </div>
+        <div class="col s9">
+            <div id="puzzle">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

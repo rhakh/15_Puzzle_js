@@ -1,0 +1,47 @@
+.board {
+    -webkit-user-select: none;
+    background: #34495e;
+    border-radius: 7px;
+    margin:50px auto;
+    position: relative;
+}
+
+.nav {
+    background: #16a085;
+}
+
+.cell {
+    background: #16a085;
+    color: #ecf0f1;
+    font-size: 64px;
+    line-height: 92px;
+    text-align: center;
+    text-shadow: 0 1px 1px #2c3e50;
+    cursor: pointer;
+    height: 92px;
+    width: 92px;
+    transition: 0.5s;
+    border-radius: 5px;
+    position: absolute;
+}
+
+.hidden {
+    display: none !important;
+}
+.visible {
+    display: inline-block !important;
+}
+.error {
+    color: red !important;
+}
+
+.meta {
+	margin: 6px;
+}
+
+.infoBlock {
+    margin: 1px !important;
+    border: 1px solid #9a9a9a;
+    min-height: 100px;
+    box-shadow: 1px 1px #b5b5b5;
+}
