@@ -1,0 +1,32 @@
+{
+  "name": "15_puzzle_js",
+  "version": "1.0.0",
+  "description": "The goal of this project is to programmatically solve the 15-puzzle game using the A* search algorithm or one of its variants.",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "fastpriorityqueue": "^0.6.3",
+    "unordered-set": "^2.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhakh/15_Puzzle_js.git"
+  },
+  "keywords": [
+    "15",
+    "Puzzle",
+    "A*"
+  ],
+  "author": "rhakh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rhakh/15_Puzzle_js/issues"
+  },
+  "homepage": "https://github.com/rhakh/15_Puzzle_js#readme"
+}
