@@ -3,9 +3,9 @@ __Summary:__ The goal of this project is to programmatically solve the [15-puzzl
 
 __How to run:__
 
-- Install packages from `src/dependencies.txt`
+- Install packages `$ npm install`
 
-- Enter in terminal: `$ node server.js`
+- Run server: `$ npm start`
 
 - Open in browser: `localhost:8080`
 
