@@ -144,6 +144,8 @@ function onClickShuffle(form, docPuzzle) {
     puzzle = new Puzzle(mapSize, iterations);
     docPuzzle = puzzle.fillCells(document.getElementById('puzzle'));
     gPuzzle = puzzle;
+
+    document.getElementById("SolveBtn").disabled = false;
 }
 
 let cellTimer;
@@ -225,4 +227,6 @@ function onClickSolve() {
             handleMoves(moves);
         },
     });
+
+    document.getElementById("SolveBtn").disabled = true;
 }

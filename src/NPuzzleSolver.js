@@ -1,72 +1,11 @@
 "use strict"
 
 const n = require('./NPuzzleNode.js');
+const u = require('./utils.js');
 const FastPriorityQueue = require('fastpriorityqueue');
 
-function nodeComparison(nodeA, nodeB) {
-
-    // optimisation by time
-    if (nodeA.price == nodeB.price)
-        return nodeA.length < nodeB.length;
-    return nodeA.price < nodeB.price;
-
-    // optimisation by short path
-    // if (nodeA.composedPrice == nodeB.composedPrice)
-    //     return (nodeA.length < nodeB.length);
-    // return (nodeA.composedPrice < nodeB.composedPrice);
-}
-
-function constructPath(node, openNodes) {
-    let curr = node;
-    let path = [];
-    let retPath = {};
-
-    while (curr.move != n.movesEnum.ROOT) {
-        path.push(curr.move);
-        curr = curr.parent;
-    }
-    path.push(curr.move);
-    path.reverse();
-    retPath.moves = path;
-    retPath.openNodes = openNodes;
-
-    return (retPath);
-}
-
-function getInversions(map) {
-    let inversions;
-
-    for (let i = 0; i < map.length; i++) {
-        for (let j = i + 1; j < map.length; j++) {
-            if (map[i] == 0 || map[j] == 0)
-                continue ;
-            if (map[i] > map[j])
-                inversions++;
-        }
-    }
-
-    return (inversions);
-}
-
-function isSolvable(map) {
-    let inversions = getInversions(map);
-    let zeroIndex = map.indexOf(0) % n.mapSize + 1;
-    let isEven = (a) => { return ((a & 0x1) == 0); }
-
-    for (let i = 0; i < map.length; i++) {
-        if (map.indexOf(i) == -1) {
-            console.log("Invalid map");
-            return (false);
-        }
-    }
-
-    zeroIndex = Math.floor(zeroIndex / n.mapSize) + 1;
-
-    return (isEven(inversions + zeroIndex));
-}
-
 function aStar(map) {
-    let openSet = new FastPriorityQueue(nodeComparison);
+    let openSet = new FastPriorityQueue(u.nodeComparison);
     let closedSet = new Set();
     let openNodes = 0;
     let root = new n.Node(map, 0);
@@ -89,7 +28,7 @@ function aStar(map) {
         // Finish
         if (curr.price == 0) {
             // construct path
-            let path = constructPath(curr, openNodes);
+            let path = u.constructPath(curr, openNodes);
             return (path);
         }
 
@@ -109,6 +48,23 @@ function aStar(map) {
 
     // can't find solution
     return null;
+}
+
+function isSolvable(map) {
+    let inversions = u.getInversions(map);
+    let zeroIndex = map.indexOf(0) % n.mapSize + 1;
+    let isEven = (a) => { return ((a & 0x1) == 0); }
+
+    for (let i = 0; i < map.length; i++) {
+        if (map.indexOf(i) == -1) {
+            console.log("Invalid map");
+            return (false);
+        }
+    }
+
+    zeroIndex = Math.floor(zeroIndex / n.mapSize) + 1;
+
+    return (isEven(inversions + zeroIndex));
 }
 
 function solve(map) {
